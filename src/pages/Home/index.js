@@ -1,7 +1,7 @@
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
-import EventCard from "../../components/EventCard";
 import PeopleCard from "../../components/PeopleCard";
+import LastRealisation from "../../components/LastRealisation"; // Import LastRealisation
 
 import "./style.scss";
 import EventList from "../../containers/Events";
@@ -13,7 +13,13 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const {last} = useData();
+  const { data, error } = useData();
+  const last = data?.last; // Assurez-vous que last est bien récupéré des données
+
+  console.log("Data:", data);
+  console.log("Error:", error);
+  console.log("Last realization data:", last);
+
   return (
     <>
       <header>
@@ -24,7 +30,7 @@ const Page = () => {
           <Slider />
         </section>
         <section className="ServicesContainer">
-          <h2 className="Title">Nos services</h2>
+          <h2 className="Title" id="nos-services">Nos services</h2>
           <p>Nous organisons des événements sur mesure partout dans le monde</p>
           <div className="ListContainer">
             <ServiceCard imageSrc="/images/priscilla-du-preez-Q7wGvnbuwj0-unsplash1.png">
@@ -53,11 +59,11 @@ const Page = () => {
           </div>
         </section>
         <section className="EventsContainer">
-          <h2 className="Title">Nos réalisations</h2>
+          <h2 className="Title" id="nos-realisations">Nos réalisations</h2>
           <EventList />
         </section>
         <section className="PeoplesContainer">
-          <h2 className="Title">Notre équipe</h2>
+          <h2 className="Title" id="notre-equipe">Notre équipe</h2>
           <p>Une équipe d’experts dédiés à l’organisation de vos événements</p>
           <div className="ListContainer">
             <PeopleCard
@@ -117,14 +123,7 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
-          <EventCard
-            imageSrc={last?.cover || 'default.jpg'}  // Ajouter une valeur par défaut
-            title={last?.title || 'Untitled'}        // Ajouter une valeur par défaut
-            date={new Date(last?.date)}
-            small
-            label="boom"
-            imageAlt={last?.title || 'Untitled'}     // Ajouter une valeur par défaut
-          />
+          <LastRealisation last={last} /> {/* Utilisation de LastRealisation */}
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>
@@ -132,16 +131,16 @@ const Page = () => {
           <div>01 23 45 67 89</div>
           <div>contact@724events.com</div>
           <div>
-            <a href="#twitch">
+            <a href="#twitch" aria-label="Twitch">
               <Icon name="twitch" />
             </a>
-            <a href="#facebook">
+            <a href="#facebook" aria-label="Facebook">
               <Icon name="facebook" />
             </a>
-            <a href="#twitter">
+            <a href="#twitter" aria-label="Twitter">
               <Icon name="twitter" />
             </a>
-            <a href="#youtube">
+            <a href="#youtube" aria-label="YouTube">
               <Icon name="youtube" />
             </a>
           </div>
@@ -150,7 +149,7 @@ const Page = () => {
           <Logo size="large" />
           <p>
             Une agence événementielle propose des prestations de service
-            spécialisées dans la conception et l'organisation de divers événements
+            spécialisées dans la conception et l&apos;organisation de divers événements
             tels que des événements festifs, des manifestations sportives et
             culturelles, des événements professionnels
           </p>

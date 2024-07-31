@@ -1,12 +1,12 @@
-/* eslint-disable react/require-default-props */
+import React from 'react';
 import PropTypes from "prop-types";
 import { getMonth } from "../../helpers/Date";
 import "./style.scss";
 
 const EventCard = ({
   imageSrc,
-  imageAlt = "image",
-  date = new Date(),
+  imageAlt = 'image',
+  date,
   title,
   label,
   small = false,

@@ -19,21 +19,34 @@ export const api = {
 export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+
   const getData = useCallback(async () => {
     try {
-      setData(await api.loadData());
+      const loadedData = await api.loadData();
+      console.log("Loaded data:", loadedData); // Vérifiez les données chargées ici
+
+      // Assignation de la dernière réalisation si la clé last n'est pas présente
+      const lastEvent = loadedData.events ? loadedData.events[loadedData.events.length - 1] : null;
+      setData({
+        ...loadedData,
+        last: loadedData.last || lastEvent,
+      });
     } catch (err) {
       setError(err);
     }
   }, []);
+
   useEffect(() => {
     if (data) return;
     getData();
-  });
-  
+  }, [data, getData]);
+
+  useEffect(() => {
+    console.log("Data loaded:", data); // Vérifiez les données chargées ici
+  }, [data]);
+
   return (
     <DataContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         data,
         error,
@@ -46,7 +59,7 @@ export const DataProvider = ({ children }) => {
 
 DataProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export const useData = () => useContext(DataContext);
 
