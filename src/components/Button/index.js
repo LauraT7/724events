@@ -1,5 +1,3 @@
-/* eslint-disable react/require-default-props */
-
 import PropTypes from "prop-types";
 import "./style.scss";
 
@@ -57,7 +55,7 @@ const Button = ({
   }
 };
 
-// eslint-disable-next-line react/no-typos
+
 Button.propTypes = {
   title: PropTypes.string,
   onClick: PropTypes.func,

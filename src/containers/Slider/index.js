@@ -29,10 +29,9 @@ const Slider = () => {
     <div className="SlideCardList">
       {byDateDesc.map((event, idx) => (
         <div
-          key={event.id || idx} // Utilisation de l'index comme fallback si event.id est undefined
-          className={`SlideCard SlideCard--${
-            index === idx ? "display" : "hide"
-          }`}
+          key={event.id || idx}
+          className={`SlideCard SlideCard--${index === idx ? "display" : "hide"
+            }`}
         >
           <img src={event.cover} alt="forum" />
           <div className="SlideCard__descriptionContainer">
@@ -48,7 +47,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc.map((event, radioIdx) => (
             <input
-              key={`${event.id || radioIdx}-radio`} // Utilisation de l'index comme fallback si event.id est undefined
+              key={`${event.id || radioIdx}-radio`}
               type="radio"
               name="radio-button"
               checked={index === radioIdx}

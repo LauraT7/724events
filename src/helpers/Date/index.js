@@ -1,4 +1,3 @@
-// helpers/Date.js
 export const MONTHS = {
   0: "janvier",
   1: "février",
@@ -15,7 +14,7 @@ export const MONTHS = {
 };
 
 export const getMonth = (date) => {
-  if (!(date instanceof Date) || isNaN(date)) {
+  if (!(date instanceof Date) || Number.isNaN(date.getTime())) {
     return 'Invalid Date';
   }
   return MONTHS[date.getMonth()];

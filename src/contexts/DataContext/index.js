@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 
 const DataContext = createContext({});
@@ -23,9 +24,7 @@ export const DataProvider = ({ children }) => {
   const getData = useCallback(async () => {
     try {
       const loadedData = await api.loadData();
-      console.log("Loaded data:", loadedData); // Vérifiez les données chargées ici
-
-      // Assignation de la dernière réalisation si la clé last n'est pas présente
+      // console.log("Loaded data:", loadedData);
       const lastEvent = loadedData.events ? loadedData.events[loadedData.events.length - 1] : null;
       setData({
         ...loadedData,
@@ -42,16 +41,17 @@ export const DataProvider = ({ children }) => {
   }, [data, getData]);
 
   useEffect(() => {
-    console.log("Data loaded:", data); // Vérifiez les données chargées ici
+    // console.log("Data loaded:", data);
   }, [data]);
 
+ 
+  const providerValue = useMemo(() => ({
+    data,
+    error,
+  }), [data, error]);
+
   return (
-    <DataContext.Provider
-      value={{
-        data,
-        error,
-      }}
-    >
+    <DataContext.Provider value={providerValue}>
       {children}
     </DataContext.Provider>
   );

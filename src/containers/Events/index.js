@@ -11,10 +11,10 @@ const PER_PAGE = 9;
 
 const EventList = () => {
   const { data, error } = useData();
-  const [type, setType] = useState(null); // Initialiser à null pour afficher tous les événements
+  const [type, setType] = useState(null); 
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Filtrer les événements par type et pagination
+  
   const filteredEvents = (
     (!type
       ? data?.events
@@ -55,11 +55,11 @@ const EventList = () => {
                 {({ setIsOpened }) => (
                   <EventCard
                     onClick={() => setIsOpened(true)}
-                    imageSrc={event.cover || 'default.jpg'}  // Ajouter une valeur par défaut
-                    title={event.title || 'Untitled'}        // Ajouter une valeur par défaut
+                    imageSrc={event.cover || 'default.jpg'}  
+                    title={event.title || 'Untitled'}        
                     date={new Date(event.date)}
                     label={event.type}
-                    imageAlt={event.title || 'Untitled'}     // Ajouter une valeur par défaut
+                    imageAlt={event.title || 'Untitled'}     
                   />
                 )}
               </Modal>

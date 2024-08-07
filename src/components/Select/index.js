@@ -11,17 +11,17 @@ const Select = ({
   label = "",
   type = "normal",
 }) => {
-  const [value, setValue] = useState(null); // Initialize value to null
+  const [value, setValue] = useState(null); 
   const [collapsed, setCollapsed] = useState(true);
 
   const changeValue = (newValue) => {
     setValue(newValue);
-    setCollapsed(true); // Collapse the dropdown after selecting a value
-    onChange(newValue); // Pass the new value to the onChange function
+    setCollapsed(true); 
+    onChange(newValue); 
   };
 
-  console.log("Current value:", value);
-  console.log("Collapsed state:", collapsed);
+  // console.log("Current value:", value);
+  // console.log("Collapsed state:", collapsed);
 
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">

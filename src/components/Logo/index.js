@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 
-/* istanbul ignore file */
+
 import PropTypes from "prop-types";
 import "./style.scss";
 

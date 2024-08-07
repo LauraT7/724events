@@ -1,7 +1,7 @@
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
 import PeopleCard from "../../components/PeopleCard";
-import LastRealisation from "../../components/LastRealisation"; // Import LastRealisation
+import LastRealisation from "../../components/LastRealisation"; 
 
 import "./style.scss";
 import EventList from "../../containers/Events";
@@ -13,12 +13,11 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-  const { data, error } = useData();
-  const last = data?.last; // Assurez-vous que last est bien récupéré des données
+  const { data } = useData();
+  const last = data?.last; 
 
-  console.log("Data:", data);
-  console.log("Error:", error);
-  console.log("Last realization data:", last);
+  // console.log("Data:", data);
+  // console.log("Last realization data:", last);
 
   return (
     <>
@@ -123,7 +122,7 @@ const Page = () => {
       <footer className="row">
         <div className="col presta">
           <h3>Notre dernière prestation</h3>
-          <LastRealisation last={last} /> {/* Utilisation de LastRealisation */}
+          <LastRealisation last={last} />
         </div>
         <div className="col contact">
           <h3>Contactez-nous</h3>
