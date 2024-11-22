@@ -11,23 +11,26 @@ const PER_PAGE = 9;
 
 const EventList = () => {
   const { data, error } = useData();
-  const [type, setType] = useState(null); 
+  const [type, setType] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  
+
   const filteredEvents = (
     (!type
       ? data?.events
       : data?.events.filter((event) => event.type === type)) || []
-  ).filter((event, index) => {
-    if (
-      (currentPage - 1) * PER_PAGE <= index &&
-      PER_PAGE * currentPage > index
-    ) {
-      return true;
-    }
-    return false;
-  });
+  )
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .filter((event, index) => {
+      if (
+        (currentPage - 1) * PER_PAGE <= index &&
+        PER_PAGE * currentPage > index
+      ) {
+        return true;
+      }
+      return false;
+    });
+
 
   const changeType = (evtType) => {
     setCurrentPage(1);
@@ -55,11 +58,11 @@ const EventList = () => {
                 {({ setIsOpened }) => (
                   <EventCard
                     onClick={() => setIsOpened(true)}
-                    imageSrc={event.cover || 'default.jpg'}  
-                    title={event.title || 'Untitled'}        
+                    imageSrc={event.cover || 'default.jpg'}
+                    title={event.title || 'Untitled'}
                     date={new Date(event.date)}
                     label={event.type}
-                    imageAlt={event.title || 'Untitled'}     
+                    imageAlt={event.title || 'Untitled'}
                   />
                 )}
               </Modal>

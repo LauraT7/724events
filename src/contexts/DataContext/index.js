@@ -24,16 +24,20 @@ export const DataProvider = ({ children }) => {
   const getData = useCallback(async () => {
     try {
       const loadedData = await api.loadData();
-      // console.log("Loaded data:", loadedData);
-      const lastEvent = loadedData.events ? loadedData.events[loadedData.events.length - 1] : null;
+      const sortedEvents = loadedData.events
+        ? loadedData.events.sort((a, b) => new Date(b.date) - new Date(a.date))
+        : [];
+      const lastEvent = sortedEvents[0] || null;
       setData({
         ...loadedData,
+        events: sortedEvents,
         last: loadedData.last || lastEvent,
       });
     } catch (err) {
       setError(err);
     }
   }, []);
+
 
   useEffect(() => {
     if (data) return;
@@ -44,7 +48,7 @@ export const DataProvider = ({ children }) => {
     // console.log("Data loaded:", data);
   }, [data]);
 
- 
+
   const providerValue = useMemo(() => ({
     data,
     error,
